@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="flex flex-col items-center justify-center h-screen px-4 bg-white">
+        <div class="flex items-center mb-4">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png" alt="India Flag" class="w-8 h-5">
+            <span class="ml-2">India</span>
+        </div>
+        <h1 class="text-2xl font-bold mb-4">Login to your account</h1>
+        <input type="tel" placeholder="9930733013" class="border-b-2 border-gray-300 mb-2 w-full py-2 text-center">
+        <p class="text-xs text-gray-500 mb-4">Mobile login available only in India.</p>
+        <button class="bg-green-600 text-white py-2 px-8 rounded">Next</button>
+        <p class="text-sm text-gray-600 my-4">Or Sign In With</p>
+        <div class="flex space-x-4">
+            <button class="flex items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo" class="w-8 h-8">
+            </button>
+            <button class="flex items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo" class="w-8 h-8">
+            </button>
+        </div>
+    </div>
+
+    <!-- Register Club Screen -->
+    <div id="registerClubScreen" class="hidden flex flex-col items-center justify-center h-screen px-4 bg-gray-900 text-white">
+        <button class="self-start mb-8 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <h1 class="text-2xl font-bold mb-2">Register as club</h1>
+        <p class="text-gray-400 mb-8 text-center">Are you a Cricket Club or an Organisation? Register now to manage your events under one suit.</p>
+        <input type="text" placeholder="Organisation / Club Name" class="bg-gray-800 border-b-2 border-gray-700 mb-4 w-full py-2">
+        <input type="text" placeholder="City" class="bg-gray-800 border-b-2 border-gray-700 mb-4 w-full py-2">
+        <input type="text" placeholder="Established Year" class="bg-gray-800 border-b-2 border-gray-700 mb-4 w-full py-2">
+        <div class="flex space-x-4 mb-4">
+            <button class="bg-gray-800 border border-gray-700 text-white py-2 px-4 rounded">Leather Ball</button>
+            <button class="bg-gray-800 border border-gray-700 text-white py-2 px-4 rounded">Tennis Ball</button>
+            <button class="bg-gray-800 border border-gray-700 text-white py-2 px-4 rounded">Soft Tennis Ball</button>
+
+        </div>
+        <button class="bg-yellow-500 text-black py-2 px-8 rounded">Register</button>
+    </div>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Function to handle form submissions
+    function handleSubmit(endpoint, data, successCallback) {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert(result.message);
+            if (result.success && typeof successCallback === 'function') {
+                successCallback();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Show a specific screen and hide others
+    function showScreen(screenId) {
+        const screens = document.querySelectorAll('body > div');
+        screens.forEach(screen => screen.classList.add('hidden'));
+        document.getElementById(screenId).classList.remove('hidden');
+    }
+
+    // Event listeners for form submissions
+    document.querySelector('#loginScreen button.bg-green-600').addEventListener('click', () => {
+        const mobileNumber = document.querySelector('#loginScreen input[type="tel"]').value;
+        const data = { mobile: mobileNumber };
+        handleSubmit('/scoreapp/login.php', data, () => {
+            window.location.href = 'registerClub.html'; // Redirect to the Register Club page after successful login
+        });
+    });
+
+       // Initial screen to show
+    showScreen('loginScreen');
+});
+
+    </script>
+</body>
+</html>

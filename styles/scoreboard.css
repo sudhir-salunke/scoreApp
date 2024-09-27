@@ -1,0 +1,451 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+@media (max-width: 768px)
+{
+
+    .page-header{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        h1{
+            font-size: 20px;
+        }
+    }
+
+    .page-header__go-back-icon{
+        
+        padding-block: 20px;
+        padding-left: 12px;
+        cursor: pointer;
+        
+    }
+
+    .score-tabs{
+        margin-top: 16px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+
+        .score-tabs__tabs{
+            list-style: none;
+            padding-bottom: 16px;
+            padding-inline: 16px;
+            position: relative;
+        }
+        .score-tabs__tabs[aria-label=true]::after {
+            content: "";
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            position: absolute;
+            top: 34px;
+            left: 0;
+        }
+    }
+
+    .innings-score{
+        width: 100%;
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+
+        .innings-score__score{
+            color: #ff6600;
+            font-size: 65px;
+            font-weight: 700;
+            line-height: 1;
+
+            .over{
+                font-size: 16px;
+            }
+        }
+
+        .innings-score__setting-wrap{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-inline: 20px;
+
+            .bg-black{
+                background-color: black;
+                padding: 4px 8px;
+                border-radius: 4px;
+                cursor: pointer;
+                
+                i{
+                    font-size: 12px;
+                }
+            }
+
+            .innings-score__setting-wrap__rhs
+            {
+                display: flex;
+                gap: 4px;
+            }
+        }
+
+        
+    }
+
+    .match-status__container{
+        width: 100%;
+        padding-inline: 20px;
+     
+        margin-top: 4px;
+
+        .match-status__wrap{
+            width: 100%;
+            padding-block: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-block: 1px solid rgb(190, 190, 190);
+
+            .match-status__top{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .match-status__bottom{
+                text-align: center;
+            }
+        }
+    }
+
+    .player-status{
+        width: 100%;
+        padding-inline: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .player-status__batsman{
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+            column-gap: 10px;
+            padding-top: 16px;
+
+            .categories{
+                font-weight: 700;
+            }
+
+            .player-status__batsman__batsmens
+            {
+
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+
+                .player-status__batsman__batsmens-heading{
+                    display: flex;
+                    gap: 8px;
+                    margin-bottom: 10px;
+
+                    
+                }
+
+                
+
+                .player-status__batsman__batsmens-name.--batsman{
+                    color: grey;
+                    font-weight: 700;
+                    padding: 2px 4px;
+
+                    &:nth-child(2)
+                    {
+                        background: #ff6600;
+                        border-radius: 4px;
+                        color: black;
+
+                    }
+                }
+            }
+
+            .player-status__batsman__runs{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+        }
+
+        .player-status__batsman.--bowler
+        {
+            border-block: 1px solid grey;
+            margin-top: 6px;
+            padding-bottom: 20px;
+        }
+    }
+
+    .over-runs{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        gap: 12px;
+        margin-top: 12px;
+        min-height: 30px;
+        .over-runs__circle-wrap
+        {
+            border-radius: 50%;
+            background-color: grey;
+            color: white;
+            padding: 8px;
+            min-width: 35px;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .over-runs__circle-wrap.--6,
+        .over-runs__circle-wrap.--4
+        {
+            background-color: #ff6600;   
+        }
+    }
+
+    .run-buttons{
+        width: calc(100% + 40px);
+        min-height: 300px;
+        background-color: #ff6600;
+        position: relative;
+        left: -2px;
+        margin-top: 8px;
+        display: flex;
+        justify-content: center;
+        
+        .run-buttons__grid{
+            margin-block: 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(3,1fr);
+
+            .run-button{
+                padding: 20px;
+                color: white;
+                font-weight: 700;
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:nth-child(11),
+                &:nth-child(12),
+                &:nth-child(13),
+                &:nth-child(14),
+                &:last-child
+                {
+                    border-bottom: none;
+                }
+
+                &:nth-child(5),
+                &:nth-child(10),
+                &:last-child
+                {
+                    border-right: none;
+                }
+                
+                .hidden-text {
+                    position: absolute; 
+                    width: 1px;        
+                    height: 1px;       
+                    overflow: hidden; 
+                    clip: rect(0, 0, 0, 0); 
+                    white-space: nowrap; 
+                }
+
+            }
+        }
+
+        .lb-buttons{
+            width: 100%;
+            padding-inline: 20px;
+            margin-top: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 50px;
+            .lb-buttons__close-section{
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                font-size: 23px; 
+            }
+            .lb-buttons__close-section-left{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                
+                i:last-child{
+                    margin-left: -12px;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+            }
+
+            .info-card{
+                position: absolute;
+            }
+
+            .more-runs__drop-down{
+                background-color: transparent;
+                border-color: black;
+                border-radius: 4px;
+                outline: black;
+            }
+
+            .lb-buttons__close-section-right{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+
+                .-plus-minus{
+                    font-size: 16px;
+                    width: 35px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    border: 1px solid black;
+                    color: black;
+
+                    &[aria-selected = true]
+                    {
+                        background-color: black;
+                        color: white;
+                    }
+                }
+            }
+            .lb-buttons__close-section.--bonus-runs{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .lb-buttons__container{
+                width: 100%;
+                padding-inline: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+
+                .lb-buttons__wrap{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+
+                    .lb-buttons__wrap-top{
+                        display: flex;
+                        justify-content: center;
+                        gap: 32px;
+
+                        .lb-buttons__btn,
+                        .runs{
+                            border: 1px solid black;
+                            min-width: 50px;
+                            height: 40px;
+                            padding: 6px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        .lb-buttons__btn.--more-btn{
+                            border-radius: 20px;
+                            gap: 8px;
+                            padding: 10px;
+                        }
+
+                        .more-runs
+                        {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 4px;
+                            border: 1px solid black;
+                            padding: 6px;
+                            gap: 10px;
+                            position: relative;
+                        }
+                        .more-runs__drop-down{
+                            position: absolute;
+                            top: 45px;
+                            background-color: #ff6600;
+                            list-style: none;
+                            width: 100%;
+                            flex-direction: column;
+                            gap: 3px;
+                            max-height: 70px;
+                            overflow-y: auto;
+                            border: 1px solid black;
+
+                            li{
+                                border-bottom: 1px solid black;
+                                display: flex;
+                                justify-content: center;
+                                padding-block: 3px;
+
+                                &:last-child{
+                                    border-bottom: none;
+                                }
+                            }
+
+                            &[aria-hidden=true]
+                            {
+                                display: none;
+                            }
+
+                            &[aria-hidden=false]
+                            {
+                                display: flex;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
+}
+
+@media (max-width: 425px)
+{
+    .score-tabs {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+    }
+    .score-tabs__tabs {
+        flex-shrink: 0; 
+    }
+    .score-tabs__tabs[aria-label=true]::after {
+       top: 33px !important;
+    }
+
+}

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register as Club - Cricket App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .content {
+            padding: 20px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .back-btn {
+            background-color: transparent;
+            color: #af933e;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .navbar .svg-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .navbar .svg-icon:last-child {
+            margin-right: 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .svg-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 5px;
+            }
+        }
+
+        /* Validation styling */
+        .is-invalid {
+            display: block;
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background-color: #2e2e2e;
+            color: white;
+            border: none;
+            border-bottom: 2px solid #5e5e5e;
+            border-radius: 0;
+            padding: 10px 15px;
+        }
+
+        .form-control:focus {
+            border-bottom: 2px solid #ffc107;
+            box-shadow: none;
+        }
+
+        .btn-custom {
+            background-color: #ffc107;
+            color: #2e2e2e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        .ball-type-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #5e5e5e;
+            color: white;
+            background-color: #2e2e2e;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .ball-type-btn.selected {
+            border-color: #ffc107;
+            background-color: #ffc107;
+            color: #2e2e2e;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white">
+
+    <!-- Main Content -->
+    <div id="mainContent" class="content">
+        <button id="backBtn" class="back-btn" onclick="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <!-- Register as Club Form -->
+        <div id="registerClubScreen" class="d-flex flex-column align-items-center justify-content-center vh-100 px-4">
+            <div class="text-center">
+                <h1 class="text-2xl font-bold mb-4">Register as Club</h1>
+                <p>Are you a Cricket Club or an Organisation?</p>
+                <p>Club feature is for you to manage your events under one suit. Go ahead and create your own Club on
+                    Stumps to have an advantage of overall and season-based statistics. It also increases the visibility
+                    of your club/organisation profile.</p>
+            </div>
+            <div class="container">
+                <form id="registerClubForm" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="clubName">Organisation / Club Name*</label>
+                        <input type="text" id="clubName" class="form-control" placeholder="Organisation / Club Name"
+                            required>
+                        <div class="invalid-feedback">Organisation / Club Name is required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City*</label>
+                        <input type="text" id="city" class="form-control" placeholder="City" required>
+                        <div class="invalid-feedback">City is required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pincode">Pincode*</label>
+                        <input type="text" id="pincode" class="form-control" placeholder="Pincode" required>
+                        <div class="invalid-feedback">Pincode is required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="establishedYear">Established Year*</label>
+                        <select id="establishedYear" class="form-control" required>
+                            <option value="">Select Year</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                        <div class="invalid-feedback">Established Year is required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ball Types*</label>
+                        <div>
+                            <button type="button" id="leatherBall" class="ball-type-btn">Leather Ball</button>
+                            <button type="button" id="tennisBall" class="ball-type-btn">Tennis Ball</button>
+                            <button type="button" id="softBall" class="ball-type-btn">Soft Tennis Ball</button>
+                            <div class="invalid-feedback">Ball Type is required.</div>
+                        </div>
+                        <input type="hidden" id="ballType" name="ballType" required>
+                    </div>
+
+                    <div class="text-center">
+                        <button id="registerBtn" type="submit" class="btn btn-custom">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            sidebar.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+             // Function to generate year options from a starting year to the current year
+             function populateYearDropdown(startYear) {
+                const yearSelect = document.getElementById('establishedYear');
+                const currentYear = new Date().getFullYear();
+                for (let year = currentYear; year >= startYear; year--) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                }
+            }
+
+            // Populate the dropdown with years starting from 1900 to the current year
+            populateYearDropdown('1947');
+
+
+            // Ball type selection
+            const leatherBallBtn = document.getElementById('leatherBall');
+            const tennisBallBtn = document.getElementById('tennisBall');
+            const softBallBtn = document.getElementById('softBall');
+
+            const ballTypeInput = document.getElementById('ballType');
+
+            leatherBallBtn.addEventListener('click', () => {
+                leatherBallBtn.classList.add('selected');
+                tennisBallBtn.classList.remove('selected');
+                softBallBtn.classList.remove('selected');                
+                ballTypeInput.value = 'Leather';
+            });
+
+            tennisBallBtn.addEventListener('click', () => {
+                tennisBallBtn.classList.add('selected');
+                leatherBallBtn.classList.remove('selected');
+                softBallBtn.classList.remove('selected');
+                ballTypeInput.value = 'Tennis';
+            });
+
+            softBallBtn.addEventListener('click', () => {
+                softBallBtn.classList.add('selected');
+                tennisBallBtn.classList.remove('selected');
+                leatherBallBtn.classList.remove('selected');
+                ballTypeInput.value = 'Soft';
+            });
+
+            // Handle form submission
+            const registerClubForm = document.getElementById('registerClubForm');
+            registerClubForm.addEventListener('submit', event => {
+                event.preventDefault();
+
+                const clubName = document.getElementById('clubName').value.trim();
+                const city = document.getElementById('city').value.trim();
+                const pincode = document.getElementById('pincode').value.trim();                
+                const establishedYear = document.getElementById('establishedYear').value.trim();
+                const ballType = document.getElementById('ballType').value.trim();
+
+                if (!clubName || !city  || !pincode|| !establishedYear || !ballType) {
+                    if (!clubName) document.getElementById('clubName').classList.add('is-invalid');
+                    if (!city) document.getElementById('city').classList.add('is-invalid');
+                    if (!pincode) document.getElementById('pincode').classList.add('is-invalid');
+                    if (!establishedYear) document.getElementById('establishedYear').classList.add('is-invalid');
+                    if (!ballType) document.querySelector('.ball-type-btn').classList.add('is-invalid');
+                    return;
+                }
+
+                // Example POST request using fetch
+                fetch('register_club.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        clubName: clubName,
+                        city: city,
+                        pincode:pincode,
+                        establishedYear: establishedYear,
+                        ballType: ballType
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = 'dashboard.html';
+                        } else {
+                            alert('There was an error registering the club.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+            // Sidebar menu handling
+            const logoutBtn = document.getElementById('logoutBtn');
+            logoutBtn.addEventListener('click', () => {
+                fetch('logout.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = 'login.html';
+                        } else {
+                            alert('There was an error logging out.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+        
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+
+</html> 

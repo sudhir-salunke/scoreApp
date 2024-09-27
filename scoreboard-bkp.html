@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Centre</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel = "stylesheet" href = "styles/scoreboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="matchCentre">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header__content">
+                <button onclick="goBack()">
+                    <i class="fa-duotone fa-solid fa-arrow-left"></i>
+                </button>
+                <h1>Match Centre</h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cog text-xl"></i>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button>Scoring</button>
+            <button>Scorecard</button>
+            <button>Stats</button>
+            <button>Super Stars</button>
+            <button>Balls</button>
+        </div>
+
+        <!-- Score Section -->
+        <div class="score-section">
+            <div class="text-4xl font-bold text-teal-600" id="score">0-0</div>
+            <div class="text-sm text-gray-500">1st Innings</div>
+            <div class="text-sm text-gray-500" id="numberOfWkt">(7)</div>
+            <div class="text-sm text-gray-500 mt-2">
+                Extras - <span id="extras">0</span> | Overs - <span id="overs"></span>.<span id="balls"></span> / <span
+                    id="overs_limit"></span>
+                | CRR - <span id="curntRunRate"></span>
+            </div>
+            <div class="text-sm text-gray-500 mt-1">
+                Partnership - 0(0)
+            </div>
+        </div>
+
+        <!-- Batsman Section -->
+        <div class="player-section">
+            <div class="flex justify-between items-center">
+                <div class="player">
+                    <i class="fas fa-pencil-alt text-light-yellow-600 mr-2"></i>
+                    <span class="font-semibold">Batsman</span>
+                </div>
+                <div class="stats flex space-x-4">
+                    <span class="font-semibold">R</span>
+                    <span class="font-semibold">B</span>
+                    <span class="font-semibold">4s</span>
+                    <span class="font-semibold">6s</span>
+                    <span class="font-semibold">SR</span>
+                </div>
+            </div>
+            
+            <div class="player flex justify-between items-center" id="batterOneSection">
+                <span>Gh <span id="b1Strike">*</span></span>
+                <div class="stats flex space-x-4" id="batter_one">
+                    <span id="batterOneRuns">0</span>
+                    <span id="batterOneBalls">0</span>
+                    <span id="batterOneFours">0</span>
+                    <span id="batterOneSixes">0</span>
+                    <span id="batterOneSR">0.0</span>
+                </div>
+            </div>
+            
+            <div class="player flex justify-between items-center" id="batterTwoSection" style="background-color: #f5e79e;">
+                <span class="font-semibold">NJ J IG G <span id="b2Strike">*</span></span>
+                <div class="stats flex space-x-4" id="batter_two">
+                    <span id="batterTwoRuns">0</span>
+                    <span id="batterTwoBalls">0</span>
+                    <span id="batterTwoFours">0</span>
+                    <span id="batterTwoSixes">0</span>
+                    <span id="batterTwoSR">0.0</span>
+                </div>
+            </div>
+        
+        <!-- <div class="player-section">
+            <div class="flex justify-between items-center">
+                <div class="player">
+                    <i class="fas fa-pencil-alt text-light-yellow-600 mr-2"></i>
+                    <span class="font-semibold">Batsman</span>
+                </div>
+                <div class="stats">
+                    <span class="font-semibold">R</span>
+                    <span class="font-semibold">B</span>
+                    <span class="font-semibold">4s</span>
+                    <span class="font-semibold">6s</span>
+                    <span class="font-semibold">SR</span>
+                </div>
+            </div>
+            <div class="player">
+                <span>Gh <span id="b1Strike">*</span></span>
+                <div class="stats" id="batter_one">
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0.0</span>
+                </div>
+            </div>
+            <div class="player" style="background-color: #f5e79e;">
+                <span class="font-semibold">NJ J IG G <span id="b2Strike">*</span></span>
+                <div class="stats" id="batter_two">
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0.0</span>
+                </div>
+            </div> -->
+            <!-- Batsman Section  END-->
+
+            <!-- Bowler Section Start -->
+
+            <div class="player">
+                <div class="flex items-center">
+                    <button onclick="openScreen('selectBowler')"> <i
+                            class="fas fa-pencil-alt text-light-yellow-600 mr-2"></i></button>
+                    <span class="font-semibold">Bowler</span>
+                </div>
+                <div class="stats" id="bowler_section">
+                    <span class="font-semibold">O</span>
+                    <span class="font-semibold">M</span>
+                    <span class="font-semibold">R</span>
+                    <span class="font-semibold">W</span>
+                    <span class="font-semibold">Eco</span>
+                </div>
+            </div>
+            <div class="player" style="background-color: #f5e79e;">
+                <span>Jj</span>
+                <div class="stats">
+                    <span id="bowler_over_count">0.0</span>
+                    <span id="bowler_over_maiden">0</span>
+                    <span id="bowler_total_run">0</span>
+                    <span id="bowler_total_wkt">0</span>
+                    <span id="bowler_over_economy">0.0</span>
+                </div>
+            </div>
+        </div>
+        <!-- Bowler Section end -->
+        <div id="selectBowler" class="flex justify-between items-center mt-4 p-4 bg-orange-500 rounded-lg hidden">
+            <button onclick="closeScreen('selectBowler')">
+                <i class="fas fa-times"></i>
+                <button class="text-xl text-white" onclick="openSelectBowler()">Select Bowler</button>
+        </div>
+
+        <!-- wide Screen -->
+        <div id="wideScreen"
+            class="bg-orange-500 p-4 mt-4 grid grid-cols-4 gap-2 text-center text-white text-lg font-semibold hidden">
+            <button onclick="updateScore('wide',0)">Wd</button>
+            <button onclick="updateScore('wide', 1)">1 + Wd</button>
+            <button onclick="updateScore('wide', 2)">2 + Wd</button>
+            <button onclick="updateScore('wide', 3)">3 + Wd</button>
+            <button onclick="updateScore('wide', 4)">4 + Wd</button>
+            <button onclick="updateScore('wide', 5)">5 + Wd</button>
+            <button onclick="updateScore('wide', 6)">6 + Wd</button>
+            <button onclick="closeScreen('wideScreen')">
+                <i class="fas fa-times"></i>
+        </div>
+        <!-- No Ball Screen -->
+        <div id="nbScreen"
+            class="bg-orange-500 p-4 mt-4 grid grid-cols-4 gap-2 text-center text-white text-lg font-semibold hidden">
+            <button onclick="updateScore('nb')">NB</button>
+            <button onclick="updateScore('nb', 1)">1 NB</button>
+            <button onclick="updateScore('nb', 2)">2 NB</button>
+            <button onclick="updateScore('nb', 3)">3 NB</button>
+            <button onclick="updateScore('nb', 4)">4 NB</button>
+            <button onclick="updateScore('nb', 6)">6 NB</button>
+            <button onclick="updateScore('lb')">Leg Byes</button>
+            <button onclick="updateScore('bye')">Byes</button>
+            <button onclick="closeScreen('nbScreen')">
+                <i class="fas fa-times"></i>
+        </div>
+        <!-- Bye Screen -->
+        <div id="byeScreen"
+            class="bg-orange-500 p-4 mt-4 grid grid-cols-4 gap-2 text-center text-white text-lg font-semibold hidden">
+            <button onclick="updateScore('bye', 1)">1 B</button>
+            <button onclick="updateScore('bye', 2)">2 B</button>
+            <button onclick="updateScore('bye', 3)">3 B</button>
+            <button onclick="updateScore('bye', 4)">4 B</button>
+            <button onclick="updateScore('bye', 5)">5 B</button>
+            <button onclick="updateScore('bye', 6)">6 B</button>
+            <button onclick="closeScreen('byeScreen')">
+                <i class="fas fa-times"></i>
+        </div>
+
+            <!-- LB Screen -->
+            <div id="lbScreen"
+            class="bg-orange-500 p-4 mt-4 grid grid-cols-4 gap-2 text-center text-white text-lg font-semibold hidden">
+            <button onclick="updateScore('lb', 1)">1 LB</button>
+            <button onclick="updateScore('lb', 2)">2 LB</button>
+            <button onclick="updateScore('lb', 3)">3 LB</button>
+            <button onclick="updateScore('lb', 4)">4 LB</button>
+            <button onclick="updateScore('lb', 5)">5 LB</button>
+            <button onclick="updateScore('lb', 6)">6 LB</button>
+            <button onclick="closeScreen('lbScreen')">
+                <i class="fas fa-times"></i>
+        </div>
+
+        <div id="wicket" class="bg-orange-500 p-4 mt-4 grid grid-cols-4 gap-2 text-center text-white text-lg font-semibold hidden">
+                    <button onclick="updateScore('out',0)">Bowled</button>
+                    <button onclick="updateScore('out',0)">Caught</button>
+                    <button onclick="updateScore('out',0)">Stumped</button>
+                    <button onclick="updateScore('out',0)">LBW</button>
+                    <button onclick="updateScore('out',0)">Run Out</button>
+                    <button onclick="updateScore('out',0)">Mankad</button>
+                    <button onclick="updateScore('out',0)">Retired</button>
+                    <button onclick="updateScore('out',0)">Over The Fence</button>
+                    <button onclick="updateScore('out',0)">One Hand One Bounce</button>
+                    <button onclick="updateScore('out',0)">Obstructing The Field</button>
+                    <button onclick="updateScore('out',0)">Hit Wicket</button>
+                    <button onclick="updateScore('out',0)">Hit The Ball Twice</button>
+                    <button onclick="updateScore('out',0)">Timed Out</button>
+                    <button onclick="closeScreen('wicket')">
+                        <i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- Scoring Buttons -->
+        <div class="bg-orange-500 p-4 mt-4 grid grid-cols-4 gap-2 text-center text-white text-lg font-semibold" id="score_board">
+            <button onclick="updateScore('run',1)">1</button>
+            <button onclick="updateScore('run',2)">2</button>
+            <button onclick="updateScore('run',3)">3</button>
+            <button onclick="updateScore('run',4)">4</button>
+            <button onclick="updateScore('run',6)">6</button>
+            <button onclick="openScreen('lbScreen')">LB</button>
+            <button onclick="openScreen('byeScreen')">Bye</button>
+            <button onclick="openScreen('wideScreen')">Wide</button>
+            <button onclick="openScreen('nbScreen')">NB</button>
+            <button onclick="updateScore('Dot')">•</button>
+            <button>More</button>
+            <button onclick="updateScore('Undo')">Undo</button>
+            <button onclick="openScreen('wicket')">Out</button>
+        </div>
+
+    </div>
+
+    <!-- Select Bowler Screen -->
+    <div id="selectBowlerSection" class="hidden p-4 bg-orange-500 h-screen">
+        <div class="flex justify-between items-center">
+            <button class="text-xl text-white" onclick="closeSelectBowler()">&larr;</button>
+            <h1 class="text-xl font-bold text-white">Select Bowler</h1>
+            <div></div>
+        </div>
+
+        <div class="bg-white mt-4 p-2 rounded-lg shadow-md">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" alt="Player 1">
+                    <div>
+                        <p class="font-semibold">Jj</p>
+                        <p class="text-gray-500">jjaj9163</p>
+                    </div>
+                </div>
+                <div class="text-gray-700">
+                    1.0 - 0 - 6 - 0
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-4">
+                <div class="flex items-center space-x-2">
+                    <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" alt="Player 2">
+                    <div>
+                        <p class="font-semibold">Sk</p>
+                        <p class="text-gray-500">skhf5925</p>
+                    </div>
+                </div>
+                <div class="text-gray-700">
+                    3.0 - 1 - 24 - 1
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-4">
+            <button class="text-lg text-white bg-green-600 px-4 py-2 rounded-lg" onclick="openAddPlayer()">ADD / CREATE
+                PLAYER</button>
+        </div>
+    </div>
+    <!-- Add/Create Player Screen -->
+    <div id="addPlayer" class="hidden p-4 bg-gray-700 bg-opacity-50 fixed inset-0 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-4 w-80">
+            <div class="flex justify-between items-center">
+                <h1 class="text-lg font-bold">Add Player (Using Profile ID)</h1>
+                <button class="text-xl" onclick="closeAddPlayer()">&#10005;</button>
+            </div>
+
+            <div class="mt-4">
+                <p class="text-gray-500">Eg: abxy9840</p>
+                <input type="text" placeholder="Profile ID" class="border w-full p-2 mt-2 rounded-lg">
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <p class="text-gray-500">or</p>
+            </div>
+
+            <div class="mt-4">
+                <p class="text-gray-500">Create New Player</p>
+                <input type="text" placeholder="Full Name" class="border w-full p-2 mt-2 rounded-lg">
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <button class="text-lg text-white bg-green-600 px-4 py-2 rounded-lg">ADD / CREATE PLAYER</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        let runs = 0;
+        let wickets = 0;
+        let balls = 0;
+        let overs = 0;
+        let extras = 0;
+        let totalBalls = 0;
+        let previousRuns = [];
+        let overs_limit = 5;
+        let overs_count = 0;
+        let numberOfWkt = 8;
+        let totalPlayerPerTeam = 8;
+
+        // Bowler stats variables
+        let bowlerTotalRuns = 0;
+        let bowlerTotalWickets = 0;
+        let bowlerOvers = 0;
+        let batterOne = {
+            runs: 0,
+            balls: 0,
+            fours: 0,
+            sixes: 0
+        };
+
+        let batterTwo = {
+            runs: 0,
+            balls: 0,
+            fours: 0,
+            sixes: 0
+        };
+
+        function updateUI(batterId, batter) {
+            document.getElementById(batterId + 'Runs').innerText = batter.runs;
+            document.getElementById(batterId + 'Balls').innerText = batter.balls;
+            document.getElementById(batterId + 'Fours').innerText = batter.fours;
+            document.getElementById(batterId + 'Sixes').innerText = batter.sixes;
+            document.getElementById(batterId + 'SR').innerText = batter.runs > 0 ? updateStats(batter, 0) : '0.0';
+        }
+
+        function highlightBatsman(batterId) {
+            document.getElementById('batterOneSection').style.backgroundColor = '';
+            document.getElementById('batterTwoSection').style.backgroundColor = '';
+            document.getElementById(batterId + 'Section').style.backgroundColor = '#f5e79e';
+        }
+
+        document.getElementById('numberOfWkt').textContent = `(${numberOfWkt})`;
+        document.getElementById('balls').textContent = balls;
+        document.getElementById('overs').textContent = overs_count;
+        document.getElementById('overs_limit').textContent = overs_limit;
+        document.getElementById('curntRunRate').textContent = calculateRunRate(runs, totalBalls);
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function updateScore(type, value) {
+            if (totalPlayerPerTeam % 2 == 0 && numberOfWkt === 1) {
+                alert("No wickets are present! Scoring is halted.");
+                return;
+            } else if (totalPlayerPerTeam % 2 !== 0 && numberOfWkt === 0) {
+                alert("No wickets are present! Scoring is halted.");
+                return;
+            } else if (overs_limit <= 0) {
+                alert("Overs limit reached! Cannot score more.");
+                return;
+            } else {
+                if (type === 'Undo') {
+                    // Undo the last score update
+                    if (previousRuns.length > 0) {
+                        const lastRun = previousRuns.pop();
+                        console.log(lastRun);
+                        if (lastRun.type === 'run') {
+                            runs -= lastRun.value;
+                            balls -= 1;
+                            totalBalls -= 1;
+                            bowlerTotalRuns -= lastRun.value;
+                           
+                        }else if (lastRun.type === 'lb' || lastRun.type === 'bye') {
+                            runs -= lastRun.value;
+                            balls -= 1;
+                            totalBalls -= 1;
+                            bowlerTotalRuns -= lastRun.value;   
+                            extras -= lastRun.value;
+                        } else if (lastRun.type === 'wide' || lastRun.type === 'nb' ) {
+                            runs -= lastRun.value;
+                            bowlerTotalRuns -= lastRun.value;   
+                            extras -= lastRun.value;
+                        } else if (lastRun.type === 'out') {
+                            wickets -= 1;
+                            numberOfWkt++;
+                            balls -= 1;
+                            totalBalls -= 1;
+                            bowlerTotalWickets -= 1;
+                        }
+                        updateDisplay();
+                        return;
+                    }
+                } else if (type === 'out') {
+                    wickets++;
+                    numberOfWkt--;
+                    balls++;
+                    totalBalls++;
+                    bowlerTotalWickets++;
+                    previousRuns.push({ type: 'out', value: 0 });
+                } else if (type === 'Dot') {
+                    balls++;
+                    totalBalls++;
+                    previousRuns.push({ type: 'run', value: 0 });
+                } else if (type === 'wide' || type === 'nb') {
+                    extras += 1 + (value || 0);
+                    previousRuns.push({ type, value: 1 + (value || 0) });
+                    runs += parseInt(extras);
+                } else if (type === 'bye' || type === 'lb') {
+                    balls++;
+                    totalBalls++;
+                    extras +=(value || 0);
+                    previousRuns.push({ type, value: 0 + (value || 0) });
+                    runs += parseInt(value);
+                } else {
+                    runs += parseInt(value);
+                    balls++;
+                    totalBalls++;
+                    previousRuns.push({ type: 'run', value });
+
+                }
+            }
+            if (balls === 6) {
+                balls = 0;
+                overs_count++;
+                overs_limit--;
+                openScreen('selectBowler')          
+            }
+
+            // Update overs
+            overs = Math.floor(balls / 6);
+            const ballFraction = balls % 6;
+            const overDisplay = `${overs}.${ballFraction}`;
+
+            // Update bowler stats
+            if (type === 'run' || type === 'wide' || type === 'nb') {
+                bowlerTotalRuns += parseInt(value || 0);
+            }
+            if (type === 'out') {
+                bowlerTotalWickets += 1;
+            }
+            if (balls % 6 === 0) {
+                bowlerOvers = overs_count + (balls / 6);
+            }
+            // Update bowler stats
+            bowlerOverUpdate(bowlerOvers, bowlerTotalRuns, bowlerTotalWickets,balls,type);
+
+            updateScoreOnServer({
+                runs: runs,
+                wickets: wickets,
+                overs: overDisplay,
+                extras: extras,
+                bowlerRuns: bowlerTotalRuns,
+                bowlerWickets: bowlerTotalWickets,
+                bowlerOvers: bowlerOvers
+            });  
+            updateDisplay(type);
+        }
+
+        function updateDisplay(type) {
+            document.getElementById('score').textContent = `${runs}-${wickets}`;
+            document.getElementById('balls').textContent = balls % 6;
+            document.getElementById('overs').textContent = Math.floor(totalBalls / 6);
+            document.getElementById('extras').textContent = extras;
+            document.getElementById('overs_limit').textContent = overs_limit;
+            document.getElementById('curntRunRate').textContent = calculateRunRate(runs, totalBalls);
+
+            // Update the wickets display
+            document.getElementById('numberOfWkt').textContent = `(${numberOfWkt})`;
+            closeScreen(type === 'out' ? 'wicket' : type === 'wide' ? 'wideScreen' : type === 'nb' ? 'nbScreen' : type === 'lb' ? 'lbScreen' : 'byeScreen');
+        }
+
+       
+        function bowlerOverUpdate(bowlerOvers, bowlerTotalRuns, bowlerTotalWickets, balls,type) {
+            const completedOvers = Math.floor(bowlerOvers);
+            const currentBall = balls % 6; // Remaining balls in the over
+            let runs= 0;
+             if(type !== 'lb' || type !=='bye'){ runs = parseInt(bowlerTotalRuns)};
+            document.getElementById('bowler_over_count').textContent = `${completedOvers}.${currentBall}`;
+            document.getElementById('bowler_total_run').textContent = runs;
+            document.getElementById('bowler_total_wkt').textContent = bowlerTotalWickets;
+            document.getElementById('bowler_over_economy').textContent = (bowlerOvers > 0) ? (bowlerTotalRuns / bowlerOvers).toFixed(2) : '0.0';
+        }
+
+        function openScreen(screenId) {
+            document.getElementById(screenId).classList.remove('hidden');
+            document.getElementById('score_board').classList.add('hidden'); // Hide score_board               
+         }
+
+        function closeScreen(screenId) {
+            document.getElementById(screenId).classList.add('hidden');
+            document.getElementById('score_board').classList.remove('hidden'); // Show score_board            
+        }
+
+        function openAddPlayer() {
+            document.getElementById('selectBowlerSection').classList.add('hidden');
+            document.getElementById('addPlayer').classList.remove('hidden');
+        }
+
+        function closeAddPlayer() {
+            document.getElementById('addPlayer').classList.add('hidden');
+            document.getElementById('selectBowlerSection').classList.remove('hidden');
+        }
+
+        function openSelectBowler() {
+            document.getElementById('matchCentre').classList.add('hidden');
+            document.getElementById('score_board').classList.add('hidden');
+            document.getElementById('selectBowlerSection').classList.remove('hidden');
+        }
+
+        function closeSelectBowler() {
+            document.getElementById('selectBowlerSection').classList.add('hidden');
+            document.getElementById('matchCentre').classList.remove('hidden');
+        }
+
+
+        function calculateRunRate(runs, totalBalls) {
+            return (balls === 0) ? 0 : ((runs / balls) * 6).toFixed(2);
+        }
+        function calculateEconomyRate(runs, overs) {
+            if (overs > 0) {
+                // Calculate economy rate as runs per over
+                return (runs / overs).toFixed(2);
+            }
+            return "0.00";
+        }
+
+    async function updateScoreOnServer(scoreData) {
+        fetch('/scoreapp/score_management.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(scoreData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Score updated successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error updating score:', error);
+        });
+    }
+    </script>
+
+</body>
+
+</html>
+
+<!--let batters = [];
+
+function addBatter(name) {
+    const newBatter = {
+        id: batters.length + 1,
+        name: name,
+        runs: 0,
+        balls: 0,
+        fours: 0,
+        sixes: 0
+    };
+    batters.push(newBatter);
+    renderBatter(newBatter);
+}
+
+function renderBatter(batter) {
+    const playerSection = document.getElementById('playerSection');
+    const batterHtml = `
+        <div class="player flex justify-between items-center" id="batter${batter.id}Section">
+            <span class="font-semibold">${batter.name} <span id="b${batter.id}Strike"></span></span>
+            <div class="stats flex space-x-4" id="batter${batter.id}">
+                <span id="batter${batter.id}Runs">0</span>
+                <span id="batter${batter.id}Balls">0</span>
+                <span id="batter${batter.id}Fours">0</span>
+                <span id="batter${batter.id}Sixes">0</span>
+                <span id="batter${batter.id}SR">0.0</span>
+            </div>
+        </div>`;
+    playerSection.insertAdjacentHTML('beforeend', batterHtml);
+}
+
+function updateStats(batter, run) {
+    batter.runs += run;
+    batter.balls += 1;
+
+    if (run === 4) {
+        batter.fours += 1;
+    } else if (run === 6) {
+        batter.sixes += 1;
+    }
+
+    const strikeRate = ((batter.runs / batter.balls) * 100).toFixed(1);
+    return strikeRate;
+}
+
+function updateUI(batter) {
+    document.getElementById(`batter${batter.id}Runs`).innerText = batter.runs;
+    document.getElementById(`batter${batter.id}Balls`).innerText = batter.balls;
+    document.getElementById(`batter${batter.id}Fours`).innerText = batter.fours;
+    document.getElementById(`batter${batter.id}Sixes`).innerText = batter.sixes;
+    document.getElementById(`batter${batter.id}SR`).innerText = batter.runs > 0 ? updateStats(batter, 0) : '0.0';
+}
+
+function highlightBatsman(batter) {
+    batters.forEach(b => {
+        document.getElementById(`batter${b.id}Section`).style.backgroundColor = '';
+    });
+    document.getElementById(`batter${batter.id}Section`).style.backgroundColor = '#f5e79e';
+}
+
+function scoreRun(batterId, run) {
+    const batter = batters.find(b => b.id === batterId);
+    if (batter) {
+        updateStats(batter, run);
+        updateUI(batter);
+        highlightBatsman(batter);
+    }
+}
+
+// Example usage:
+addBatter('Gh');
+addBatter('NJ J IG G'); -->

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Tournament - Cricket App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            padding: 15px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+            z-index: 900;
+            position: relative;
+            width: 100%;
+        }
+
+        .content.shifted {
+            margin-left: 250px;
+        }
+
+        .toggle-btn {
+            background-color: transparent;
+            color: #343a40;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
+        }
+
+        .close-btn {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                left: -100%;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .content.shifted {
+                margin-left: 0;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .navbar .svg-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .navbar .svg-icon:last-child {
+            margin-right: 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .svg-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 5px;
+            }
+        }
+
+        /* Validation styling */
+        .is-invalid {
+            display: block;
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <ul class="menu">
+            <li><a href="createTournament.html">Tournament</a></li>
+            <li><a href="registerClub.html">Club</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a id="logoutBtn" href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="content">
+        <button id="sidebarCollapse" class="toggle-btn" onclick="toggleSidebar()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+
+        <!-- Create Tournament Screen -->
+        <div id="createTournamentScreen"
+            class="d-flex flex-column align-items-center justify-content-center vh-100 px-4 bg-gray-900 text-white">
+            <div class="text-center">
+                <h1 class="text-2xl font-bold mb-4">Create Tournament</h1>
+                <p class="text-muted">Fill in the details below to create a new tournament.</p>
+            </div>
+            <div class="container">
+                <form id="createTournamentForm" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="tournamentName">Tournament Name</label>
+                        <input type="text" id="tournamentName" class="form-control" placeholder="Tournament Name"
+                            required>
+                        <div class="invalid-feedback">Tournament name is required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register_club_id">Club/Organisation Name</label>
+                        <select id="register_club_id" class="form-control" required>
+                            <option value="">Select Club</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                        <div class="invalid-feedback">Club name is required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="season">Season</label>
+                        <input type="text" id="season" class="form-control" placeholder="Season" required>
+                        <div class="invalid-feedback">Season is required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <select id="year" class="form-control" required>
+                            <option value="">Select Year</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                        <div class="invalid-feedback">Year is required.</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" class="form-control" required>
+                            <div class="invalid-feedback">Start date is required.</div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate" class="form-control" required>
+                            <div class="invalid-feedback">End date is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ballType">Ball Type</label>
+                        <select id="ballType" name="ballType" class="form-control" required>
+                            <option value="">Select Ball Type</option>
+                            <option value="Leather">Leather</option>
+                            <option value="Tennis">Tennis</option>
+                            <option value="Soft Tennis">Soft Tennis</option>
+                        </select>
+                        <div class="invalid-feedback">Ball Type is required.</div>
+                    </div>
+
+                    <div class="text-center">
+                        <button id="createTournamentBtn" type="submit" class="btn btn-warning text-dark">Create
+                            Tournament</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            sidebar.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to generate year options from a starting year to the current year
+            function populateYearDropdown(startYear) {
+                const yearSelect = document.getElementById('year');
+                const currentYear = new Date().getFullYear();
+                for (let year = currentYear; year >= startYear; year--) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                }
+            }
+
+            // Populate the dropdown with years starting from 1900 to the current year
+            populateYearDropdown(1900);
+
+            // Function to handle form submissions
+            function handleSubmit(endpoint, data, successCallback) {
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(result => {
+                    alert(result.message);
+                    if (result.success && typeof successCallback === 'function') {
+                        successCallback();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+
+            // Load club names on page load
+            loadClubNames();
+
+            // Logout Functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            logoutBtn.addEventListener('click', () => {
+                fetch('logout.php', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(result => {
+                        alert(result.message);
+                        if (result.success) {
+                            window.location.href = 'index.html';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+            // Handle form submission
+            // const createTournamentForm = document.getElementById('createTournamentForm');
+            // createTournamentForm.addEventListener('submit', event => {
+            //     event.preventDefault();
+
+            //     if (createTournamentForm.checkValidity() === false) {
+            //         event.stopPropagation();
+            //     } else {
+            //         const tournamentData = {
+            //             tournamentName: document.getElementById('tournamentName').value,
+            //             register_club_id: document.getElementById('register_club_id').value,
+            //             season: document.getElementById('season').value,
+            //             year: document.getElementById('year').value,
+            //             startDate: document.getElementById('startDate').value,
+            //             endDate: document.getElementById('endDate').value,
+            //             ballType: document.getElementById('ballType').value
+            //         };
+            //         handleSubmit('createTournament.php', tournamentData, () => {
+            //             createTournamentForm.reset();
+            //         });
+            //     }
+            //     createTournamentForm.classList.add('was-validated');
+            // });
+
+            // Form validation and submission
+            document.querySelector('#createTournamentForm').addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const tournamentName = document.querySelector('#tournamentName').value.trim();
+                const register_club_id = document.querySelector('#register_club_id').value;
+                const season = document.querySelector('#season').value.trim();
+                const season_year = document.querySelector('#year').value;
+                const startDate = document.querySelector('#startDate').value;
+                const endDate = document.querySelector('#endDate').value;
+                const ballType = document.querySelector('#ballType').value;
+
+                // Client-side validation
+                let isValid = true;
+                const form = document.querySelector('#createTournamentForm');
+                form.querySelectorAll('.form-control').forEach(input => {
+                    if (!input.value) {
+                        input.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!ballType) {
+                    document.querySelector('#ballType').classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    document.querySelector('#ballType').classList.remove('is-invalid');
+                }
+
+                if (!isValid) return;
+
+                if (new Date(startDate) > new Date(endDate)) {
+                    alert('End date must be after start date.');
+                    return;
+                }
+
+                const data = { tournamentName, register_club_id, season, season_year, startDate, endDate, ballType };
+                handleSubmit('/scoreapp/create_tournament.php', data, () => {
+                    window.location.href = 'dashboard.html'; // Redirect to dashboard on success
+                });
+            });
+        });
+
+        function loadClubNames() {
+            fetch('get_club_names.php')
+                .then(response => response.json())
+                .then(data => {
+                    const clubSelect = document.getElementById('register_club_id');
+                    data.clubs.forEach(club => {
+                        const option = document.createElement('option');
+                        option.value = club.id;
+                        option.textContent = club.name;
+                        clubSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching clubs:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>

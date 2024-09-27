@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cricket App</title>
+  <script src="https://cdn.jsdelivr.net/npm/tailwindcss@^2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f57c00;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background-color: #e65100;
+      color: white;
+    }
+    .header h1 {
+      font-weight: 500;
+    }
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 16px;
+    }
+    .btn {
+      background-color: #ffcc80;
+      padding: 12px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn:hover {
+      background-color: #ffa726;
+    }
+    .settings-container {
+      padding: 16px;
+    }
+    .settings-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+    }
+    .radio-group {
+      display: flex;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Wicket Section -->
+  <div class="header">
+    <span>&#10005;</span>
+    <h1>Wicket</h1>
+  </div>
+  <div class="button-grid">
+    <div class="btn" onclick="handleWicket('Bowled')">Bowled</div>
+    <div class="btn" onclick="handleWicket('Caught')">Caught</div>
+    <div class="btn" onclick="handleWicket('Stumped')">Stumped</div>
+    <div class="btn" onclick="handleWicket('LBW')">LBW</div>
+    <div class="btn" onclick="handleWicket('Run Out')">Run Out</div>
+    <div class="btn" onclick="handleWicket('Mankad')">Mankad</div>
+    <div class="btn" onclick="handleWicket('Retired')">Retired</div>
+    <div class="btn" onclick="handleWicket('Over The Fence')">Over The Fence</div>
+    <div class="btn" onclick="handleWicket('One Hand One Bounce')">One Hand One Bounce</div>
+    <div class="btn" onclick="handleWicket('Obstructing The Field')">Obstructing The Field</div>
+    <div class="btn" onclick="handleWicket('Hit Wicket')">Hit Wicket</div>
+    <div class="btn" onclick="handleWicket('Hit The Ball Twice')">Hit The Ball Twice</div>
+    <div class="btn" onclick="handleWicket('Timed Out')">Timed Out</div>
+  </div>
+
+  <!-- Match Settings Section -->
+  <div class="header">
+    <span>&#10005;</span>
+    <h1>Match Settings</h1>
+  </div>
+  <div class="settings-container">
+    <div class="settings-option">
+      <span>Wagon Wheel</span>
+      <input type="checkbox" id="wagonWheel" />
+    </div>
+    <div class="settings-option">
+      <span>Add extras to Wide</span>
+      <input type="checkbox" id="addExtrasWide" checked />
+    </div>
+    <div class="settings-option">
+      <span>Add extras to No Ball</span>
+      <input type="checkbox" id="addExtrasNoBall" checked />
+    </div>
+    <div class="settings-option">
+      <span>No. of balls per over</span>
+      <div class="radio-group">
+        <input type="radio" name="ballsPerOver" value="4" id="balls4" />
+        <label for="balls4">4</label>
+        <input type="radio" name="ballsPerOver" value="5" id="balls5" />
+        <label for="balls5">5</label>
+        <input type="radio" name="ballsPerOver" value="6" id="balls6" checked />
+        <label for="balls6">6</label>
+      </div>
+    </div>
+    <div class="settings-option">
+      <span>Max balls per over with extras</span>
+      <div class="radio-group">
+        <input type="radio" name="maxBallsWithExtras" value="6" id="max6" checked />
+        <label for="max6">6</label>
+        <input type="radio" name="maxBallsWithExtras" value="7" id="max7" />
+        <label for="max7">7</label>
+        <input type="radio" name="maxBallsWithExtras" value="8" id="max8" />
+        <label for="max8">8</label>
+      </div>
+    </div>
+    <div class="settings-option">
+      <span>Add Wide balls to batsman</span>
+      <input type="checkbox" id="addWideBallsToBatsman" />
+    </div>
+    <div class="settings-option">
+      <span>Add Wide runs to batsman</span>
+      <input type="checkbox" id="addWideRunsToBatsman" />
+    </div>
+    <div class="settings-option">
+      <span>Add No Ball extras to batsman</span>
+      <input type="checkbox" id="addNoBallExtrasToBatsman" />
+    </div>
+  </div>
+
+  <!-- JavaScript Actions -->
+  <script>
+    function handleWicket(type) {
+      alert('Wicket Selected: ' + type);
+    }
+
+    // This JavaScript just captures the toggle values for now
+    document.getElementById('wagonWheel').addEventListener('change', function () {
+      console.log('Wagon Wheel: ' + this.checked);
+    });
+
+    document.getElementById('addExtrasWide').addEventListener('change', function () {
+      console.log('Add extras to Wide: ' + this.checked);
+    });
+
+    document.getElementById('addExtrasNoBall').addEventListener('change', function () {
+      console.log('Add extras to No Ball: ' + this.checked);
+    });
+
+    // Balls per over logic
+    document.querySelectorAll('input[name="ballsPerOver"]').forEach((el) =>
+      el.addEventListener('change', function () {
+        console.log('Balls per over selected: ' + this.value);
+      })
+    );
+
+    // Max balls per over with extras logic
+    document.querySelectorAll('input[name="maxBallsWithExtras"]').forEach((el) =>
+      el.addEventListener('change', function () {
+        console.log('Max balls with extras selected: ' + this.value);
+      })
+    );
+
+    // Toggle others
+    document.getElementById('addWideBallsToBatsman').addEventListener('change', function () {
+      console.log('Add Wide balls to batsman: ' + this.checked);
+    });
+
+    document.getElementById('addWideRunsToBatsman').addEventListener('change', function () {
+      console.log('Add Wide runs to batsman: ' + this.checked);
+    });
+
+    document.getElementById('addNoBallExtrasToBatsman').addEventListener('change', function () {
+      console.log('Add No Ball extras to batsman: ' + this.checked);
+    });
+  </script>
+</body>
+</html>

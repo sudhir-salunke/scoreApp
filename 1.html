@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Dashboard with Toggle Sidebar</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            padding: 15px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar .menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar .menu li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar .menu li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+        }
+
+        .sidebar .menu li a:hover {
+            color: #ffc107;
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+            z-index: 900;
+            position: relative;
+            width: 100%;
+        }
+
+        .content.shifted {
+            margin-left: 250px;
+        }
+
+        .toggle-btn {
+            background-color: transparent;
+            color: #343a40;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
+        }
+
+        .close-btn {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 0;
+            }
+
+            .sidebar {
+                left: -250px;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .content.shifted {
+                margin-left: 0;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .navbar .svg-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .navbar .svg-icon:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <button id="closeSidebarBtn" class="close-btn">&times;</button>
+        <ul class="menu">
+            <li><a href="registerClub.html">Club</a></li>
+            <li><a href="createTournament.html">Tournament</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a id="logoutBtn" href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Navbar with Toggle Button -->
+    <div class="navbar">
+        <div>
+            <button id="toggleSidebarBtn" class="toggle-btn">
+                <svg class="svg-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>       
+    </div>
+
+    <!-- Content -->
+    <div id="content" class="content">
+        <h2>Welcome to the Dashboard</h2>
+
+        <!-- Matches Section -->
+        <div class="bg-white p-4 rounded-lg shadow mb-4">
+            <h2 class="text-xl font-semibold mb-2">Matches</h2>
+            <div class="bg-light p-4 rounded-lg d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-muted small">GROUP A Match, T10, Today</p>
+                    <div class="d-flex mt-2">
+                        <div class="d-flex align-items-center mr-3">
+                            <img src="https://via.placeholder.com/24" alt="Kafiya" class="rounded-circle mr-1">
+                            <span class="font-weight-bold">KAFIYA</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/24" alt="Taisir" class="rounded-circle mr-1">
+                            <span class="font-weight-bold">TAISIR</span>
+                        </div>
+                    </div>
+                    <p class="small mt-2">JMMPPL - 4</p>
+                    <a href="#" class="text-primary small">View Tournament</a>
+                </div>
+                <div class="text-danger font-weight-bold">LIVE</div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="bg-white p-4 rounded-lg shadow mb-4 d-flex align-items-center">
+            <img src="https://via.placeholder.com/48" alt="Profile" class="rounded-lg">
+            <div class="ml-4">
+                <h3 class="font-weight-bold">Sudhir</h3>
+                <div class="d-flex mt-2">
+                    <div class="mr-4">
+                        <p class="text-muted small">Matches</p>
+                        <p class="font-weight-bold">39</p>
+                    </div>
+                    <div>
+                        <p class="text-muted small">Runs</p>
+                        <p class="font-weight-bold">88</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tournaments Section -->
+        <div class="bg-white p-4 rounded-lg shadow d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/48" alt="Tournament" class="rounded-lg">
+                <div class="ml-4">
+                    <p class="text-muted small">Mymensingh</p>
+                    <h3 class="font-weight-bold">JMMPPL</h3>
+                    <p class="text-muted small">HAMIDUL ISLAM's Club</p>
+                </div>
+            </div>
+            <svg class="bi bi-chevron-right" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8.646 4.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 1 1-.708-.708L12.293 9 8.646 5.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('content');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+
+        toggleSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            content.classList.toggle('shifted');
+        });
+
+        closeSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            content.classList.remove('shifted');
+        });
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        logoutBtn.addEventListener('click', () => {
+            // Destroy the session
+            fetch('/scoreapp/logout.php', { method: 'POST' })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        window.location.href = 'login.html';
+                    } else {
+                        alert('Logout failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>

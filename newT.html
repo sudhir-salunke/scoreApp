@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Tournament</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #1e293b; /* Dark background */
+      color: #ffffff;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #0f172a; /* Dark card background */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .form-label {
+      color: #facc15; /* Yellow for the labels */
+      font-weight: 500;
+    }
+    .input-field {
+      background-color: #334155; /* Darker input background */
+      color: #ffffff;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .input-field:focus {
+      outline: none;
+      box-shadow: 0 0 5px #facc15;
+    }
+    .btn-option {
+      background-color: #334155;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .btn-option.selected {
+      background-color: #facc15;
+      color: #000000;
+      border: 2px solid #facc15;
+    }
+    .btn-option:hover {
+      background-color: #64748b;
+    }
+    .submit-btn {
+      background-color: #facc15;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #eab308;
+    }
+       /* Validation styling */
+       .is-invalid {
+            display: block;
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+  </style>
+</head>
+<body>
+
+  <!-- Create Tournament Form -->
+  <div class="form-container">
+    <div class="flex justify-between items-center mb-6">
+      <button class="text-xl text-white">&larr;</button>
+      <h1 class="text-xl text-white font-bold">Create Tournament</h1>
+    </div>
+    
+    <form id="createTournamentForm">
+      <!-- Tournament Name -->
+      <label class="form-label" for="tournamentName">Tournament Name *</label>
+      <input type="text" id="tournamentName" class="input-field" placeholder="Enter tournament name" required>
+      <div class="invalid-feedback">Tournament Name is required.</div>
+
+
+      <!-- Club/Organization Name -->
+      <label class="form-label" for="clubName">Club/Organisation Name *</label>
+      <input type="text" id="clubName" class="input-field" placeholder="Enter club/organisation name" required>
+      <div class="invalid-feedback">Club/Organisation Name is required.</div>
+
+
+       <!-- Season -->
+       <label class="form-label" for="season">Season *</label>
+       <input type="text" id="season" class="input-field" placeholder="Enter season" required>
+       <div class="invalid-feedback">Season  is required.</div>
+
+
+      <!-- Season/Year -->
+      <label class="form-label" for="seasonYear">Season / Year *</label>
+      <input type="text" id="seasonYear" class="input-field" placeholder="Enter season/year" required>
+      <div class="invalid-feedback">Season / Year is required.</div>
+
+
+      <!-- Start Date and End Date -->
+      <div class="flex space-x-4">
+        <div class="w-1/2">
+          <label class="form-label" for="startDate">Start Date</label>
+          <input type="date" id="startDate" class="input-field" required>
+          <div class="invalid-feedback">Start date is required.</div>
+        </div>
+        <div class="w-1/2">
+          <label class="form-label" for="endDate">End Date</label>
+          <input type="date" id="endDate" class="input-field" required>
+          <div class="invalid-feedback">End date is required.</div>
+        </div>
+      </div>
+
+      <!-- Ball Type -->
+      <label class="form-label" for="ballType">Ball Type*</label>
+      <div class="flex space-x-4 mb-6" id="ballType">
+        <div id="leatherBall" class="btn-option" onclick="selectBallType('Leather')">Leather Ball</div>
+        <div id="tennisBall" class="btn-option" onclick="selectBallType('Tennis')">Tennis Ball</div>
+        <div class="invalid-feedback">Ball Type is required.</div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="submit-btn" onclick="submitTournament()">Create Tournament</div>
+    </form>
+  </div>
+
+  <!-- JavaScript to handle ball type selection and form submission -->
+  <script>
+    let selectedBallType = '';
+
+    // Function to handle ball type selection
+    function selectBallType(type) {
+      selectedBallType = type;
+      
+      // Toggle the selected class
+      document.getElementById('leatherBall').classList.remove('selected');
+      document.getElementById('tennisBall').classList.remove('selected');
+      
+      if (type === 'Leather') {
+        document.getElementById('leatherBall').classList.add('selected');
+      } else {
+        document.getElementById('tennisBall').classList.add('selected');
+      }
+    }
+
+    // Function to handle form submission
+    function submitTournament() {
+      event.preventDefault();
+      // Get form values
+      const tournamentName = document.getElementById('tournamentName').value;
+      const register_club_id = document.getElementById('clubName').value;
+      const season = document.getElementById('season').value;
+      const seasonYear = document.getElementById('seasonYear').value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+
+       // Create tournament object
+      const tournament = {
+        tournamentName,
+        register_club_id,
+        season,
+        seasonYear,
+        startDate,
+        endDate,
+        ballType: selectedBallType
+      };
+
+
+// Client-side validation
+      let isValid = true;
+        const form = document.querySelector('#createTournamentForm');
+        form.querySelectorAll('.form-control').forEach(input => {
+            if (!input.value) {
+                input.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        if (!selectedBallType) {
+            document.querySelector('#ballType').classList.add('is-invalid');
+            isValid = false;
+        } else {
+            document.querySelector('#ballType').classList.remove('is-invalid');
+        }
+
+        if (!isValid) return;
+
+        if (new Date(startDate) > new Date(endDate)) {
+            alert('End date must be after start date.');
+            return;
+        }
+
+        const data = { tournamentName, register_club_id, season, season_year, startDate, endDate, ballType };
+        handleSubmit('/scoreapp/create_tournament.php', data, () => {
+            window.location.href = 'dashboard.html'; // Redirect to dashboard on success
+        });
+
+   
+    }
+    // Function to handle form submissions
+    function handleSubmit(endpoint, data, successCallback) {
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(result => {
+                    alert(result.message);
+                    if (result.success && typeof successCallback === 'function') {
+                         // Optionally, reset the form
+                    document.getElementById('createTournamentForm').reset();
+                    document.getElementById('leatherBall').classList.remove('selected');
+                    document.getElementById('tennisBall').classList.remove('selected');
+                    selectedBallType = '';
+                        successCallback();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+  </script>
+
+</body>
+</html>

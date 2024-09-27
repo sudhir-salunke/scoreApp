@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "styles/scoreboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="page-header">
+        <div class="page-header__go-back-icon">
+            <i class="fa-duotone fa-solid fa-arrow-left"></i>        
+        </div>
+        <h1>Match Score</h1>
+    </div>
+
+    <ul class="score-tabs">
+        <li class = "score-tabs__tabs" aria-label="true">Scoring</li>
+        <li class = "score-tabs__tabs">Scoreboard</li>
+        <li class = "score-tabs__tabs">Stats</li>
+        <li class = "score-tabs__tabs">Super Stars</li>
+        <li class = "score-tabs__tabs">Balls</li>
+    </ul>
+
+    <div class="innings-score">
+        <h3 class="inning-score__team-name">TQ</h3>
+        <p class="innings-score__innings-number">1st Innings</p>
+        <p class = "innings-score__score">18-0<span class="over">(8)</span></p>
+        <div class="innings-score__setting-wrap">
+            <div class="innings-score__setting-wrap__lhs">
+                <div class="innings-score__setting-icon-setting bg-black"><i class="fa-solid fa-gear" style="color: #ffffff;"></i></div>
+            </div>
+            <div class="innings-score__setting-wrap__rhs">
+                <div class="innings-score__setting-icon-volume bg-black"><i class="fa-solid fa-volume-xmark" style="color: #ffffff;"></i></div>
+                <div class="innings-score__setting-icon-share bg-black"><i class="fa-solid fa-share-nodes" style="color: #ffffff;"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-status__container">
+        <div class="match-status__wrap">
+            <div class = "match-status__top">
+                <p>Extras - 6</p>
+                <p>Overs - 1.0 / 10</p>
+                <p>CRR - 18.0</p>
+            </div>
+            <div class="match-status__bottom">
+                Partnership - 18(7)
+            </div>
+        </div>
+    </div>
+
+    <div class="player-status">
+        <div class="player-status__batsman">
+            <div class="player-status__batsman__batsmens">
+                <div class="player-status__batsman__batsmens-heading">
+                    <i class="fa-solid fa-pencil" style="color: #ffae00;"></i>
+                    <p>Batsman</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name --batsman">Bf</div>
+                <div class="player-status__batsman__batsmens-name --batsman">Coco</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">R</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">1</div>
+                <div class="player-status__batsman__batsmens-name">11</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">B</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">1</div>
+                <div class="player-status__batsman__batsmens-name">11</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">4s</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">1</div>
+                <div class="player-status__batsman__batsmens-name">11</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">6s</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">1</div>
+                <div class="player-status__batsman__batsmens-name">11</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">SR</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">1</div>
+                <div class="player-status__batsman__batsmens-name">11</div>
+            </div>
+        </div>
+        <div class="player-status__batsman --bowler">
+            <div class="player-status__batsman__batsmens">
+                <div class="player-status__batsman__batsmens-heading">
+                    <i class="fa-solid fa-pencil" style="color: #ffae00;"></i>
+                    <p>Bowler</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">-</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">R</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">-</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">B</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">-</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">4s</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">-</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">6s</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">-</div>
+            </div>
+
+            <div class="player-status__batsman__runs">
+                <div class="player-status__batsman__runs-heading">
+                    <p class="categories">SR</p>
+                </div>
+                <div class="player-status__batsman__batsmens-name">-</div>
+            </div>
+        </div>
+
+        <div class="over-runs">
+            
+        </div>
+
+        <div class="run-buttons">
+                <div class="run-buttons__grid">
+                    <div class="run-button runs">
+                        0
+                    </div>
+                    <div class="run-button runs">
+                        1
+                    </div>
+                    <div class="run-button runs">
+                        2
+                    </div>
+                    <div class="run-button runs">
+                        3
+                    </div>
+                    <div class="run-button runs">
+                        4
+                    </div>
+                    <div class="run-button runs">
+                        6
+                    </div>
+                    <div class="run-button">
+                        LB
+                    </div>
+                    <div class="run-button">
+                        Bye
+                    </div>
+                    <div class="run-button">
+                        WB
+                    </div>
+                    
+                    <div class="run-button">
+                        NB
+                    </div>
+                    <div class="run-button">
+                        More
+                    </div>
+                    <div class="run-button">
+                        <span class="hidden-text">bonus</span>
+                        <i class="fa-solid fa-baseball" style="color: #ffffff;"></i>
+                    </div>
+                    <div class="run-button">
+                        <span class="hidden-text">undo</span>
+                        <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i>
+                    </div>
+                    <div class="run-button">
+                        Out
+                    </div>
+                    <div class="run-button">
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="lb-buttons" data-option = "LB">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>Leg Byes</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="lb-buttons__btn">
+                                    1 LB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    2 LB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    3 LB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    4 LB
+                                </div>
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                                <div class="lb-buttons__btn">
+                                    5 LB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    6 LB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    7 LB
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lb-buttons" data-option = "NB">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>No Ball</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="runs">
+                                    NB
+                                </div>
+                                <div class="runs">
+                                    1 + NB
+                                </div>
+
+                                <div class="runs">
+                                    2 + NB
+                                </div>
+
+                                <div class="runs">
+                                    3 + NB
+                                </div>
+
+                                <div class="runs">
+                                    4 + NB
+                                </div>
+
+                               
+
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+
+                                <div class="runs">
+                                    6 + NB
+                                </div>
+                               
+                                <div class="lb-buttons__btn">
+                                   Leg Byes
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    Byes
+                                </div>
+
+                                <!-- <div class="lb-buttons__btn runs">
+                                   4 5 6 7
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lb-buttons" data-option = "WB">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>Wide Ball</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="runs">
+                                    WB
+                                </div>
+                                <div class="runs">
+                                    1 + WB
+                                </div>
+
+                                <div class="runs">
+                                    2 + WB
+                                </div>
+
+                                <div class="runs">
+                                    3 + WB
+                                </div>
+
+                                <div class="runs">
+                                    4 + WB
+                                </div>
+
+                                
+
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+
+                                <div class="runs">
+                                    6 + WB
+                                </div>
+                               
+                                <div class="lb-buttons__btn">
+                                   Leg Byes
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    Byes
+                                </div>
+
+                                <!-- <div class="lb-buttons__btn">
+                                   4 5 6 7
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!-- 
+                <div class="lb-buttons" data-option = "4 5 6 7">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>No Ball (More runs)</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="lb-buttons__btn">
+                                    4 NB
+                                </div>
+                                <div class="lb-buttons__btn">
+                                    5 NB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    6 NB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    7 NB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    8 NB
+                                </div>
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                                <div class="lb-buttons__btn">
+                                    9 NB
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    10 NB
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="lb-buttons" data-option = "Byes">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>No Ball (Byes)</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="runs">
+                                    1B NB
+                                </div>
+                                <div class="runs">
+                                    2B NB
+                                </div>
+
+                                <div class="runs">
+                                    3B NB
+                                </div>
+
+                                <div class="runs">
+                                    4B NB 
+                                </div>
+
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                               
+                                <div class="runs">
+                                    5B NB
+                                </div>
+
+                                <div class="runs">
+                                    6B NB
+                                </div>
+
+                                <div class="runs">
+                                    7B NB
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lb-buttons" data-option = "Leg Byes">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>No Ball (Leg Byes)</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="runs">
+                                    1L NB
+                                </div>
+                                <div class="runs">
+                                    2L NB
+                                </div>
+
+                                <div class="runs">
+                                    3L NB
+                                </div>
+
+                                <div class="runs">
+                                    4L NB 
+                                </div>
+
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                               
+                                <div class="runs">
+                                    5L NB
+                                </div>
+
+                                <div class="runs">
+                                    6L NB
+                                </div>
+
+                                <div class="runs">
+                                    7L NB
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lb-buttons" data-option = "Bye">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>Bye</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="runs">
+                                    1B
+                                </div>
+                                <div class="runs">
+                                    2B
+                                </div>
+
+                                <div class="runs">
+                                    3B
+                                </div>
+
+                                <div class="runs">
+                                    4B 
+                                </div>
+
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                               
+                                <div class="runs">
+                                    5B
+                                </div>
+
+                                <div class="runs">
+                                    6B
+                                </div>
+
+                                <div class="runs">
+                                    7B
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lb-buttons" data-option = "Out">
+                    <div class="lb-buttons__close-section">
+                        <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                        <p>Wicket</p>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="lb-buttons__btn">
+                                    Bowled
+                                </div>
+                                <div class="lb-buttons__btn">
+                                    Caught
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    Stumped
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    LBW 
+                                </div>
+
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                               
+                                <div class="lb-buttons__btn">
+                                    Run Out
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    Mankad
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    Retired
+                                </div>
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                               
+                                <div class="lb-buttons__btn">
+                                    Over The Fence
+                                </div>
+
+                                <div class="lb-buttons__btn --more-btn">
+                                    More
+                                    <i class="fa-solid fa-circle-chevron-down" style="color: #000000;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lb-buttons" data-option = "bonus">
+                    <div class="lb-buttons__close-section --bonus-runs">
+                        <div class="lb-buttons__close-section-left">
+                            <i class="fa-solid fa-xmark js-closeLbOptions"></i>
+                            <p>Bonus Runs</p>
+                            <i class="fa-solid fa-circle-info" style="color: #000000;"></i>
+                        </div>
+                        <div class="lb-buttons__close-section-right">
+                            <span class="-plus-minus" aria-selected="true">+</span>
+                            <span class="-plus-minus" aria-selected="false">-</span>
+                        </div>
+                    </div>
+                    <div class = "lb-buttons__container">
+                        <div class="lb-buttons__wrap">
+                            <div class="lb-buttons__wrap-top">
+                                <div class="lb-buttons__btn">
+                                    <span class="toggle-plus-minus">+</span> 1
+                                </div>
+                                <div class="lb-buttons__btn">
+                                    <span class="toggle-plus-minus">+</span> 2
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    <span class="toggle-plus-minus">+</span> 3
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    <span class="toggle-plus-minus">+</span> 4 
+                                </div>
+
+                            </div>
+
+                            <div class="lb-buttons__wrap-top">
+                               
+                                <div class="lb-buttons__btn">
+                                    <span class="toggle-plus-minus">+</span> 5
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    <span class="toggle-plus-minus">+</span> 6
+                                </div>
+
+                                <div class="lb-buttons__btn">
+                                    <span class="toggle-plus-minus">+</span> 8
+                                </div>
+                                <div class="more-runs js-more-runs">
+                                    More
+                                    <i class="fa-solid fa-circle-chevron-down" style="color: #000000;"></i>
+
+                                    <ul class="more-runs__drop-down" aria-hidden="true">
+                                        <li><span class="toggle-plus-minus">+</span>9</li>
+                                        <li><span class="toggle-plus-minus">+</span>10</li>
+                                        <li><span class="toggle-plus-minus">+</span>11</li>
+                                        <li><span class="toggle-plus-minus">+</span>12</li>
+                                        <li><span class="toggle-plus-minus">+</span>13</li>
+                                        <li><span class="toggle-plus-minus">+</span>14</li>
+                                        <li><span class="toggle-plus-minus">+</span>15</li>
+                                        <li><span class="toggle-plus-minus">+</span>16</li>
+                                    </ul>
+                                </div>
+
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+      
+    </div>
+
+    <div>
+        
+    </div>
+
+    <script src = "js/scoreboard.js"></script>
+</body>
+</html>
