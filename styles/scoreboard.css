@@ -200,6 +200,9 @@
         gap: 12px;
         margin-top: 12px;
         min-height: 30px;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
         .over-runs__circle-wrap
         {
             border-radius: 50%;
@@ -211,6 +214,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
             font-weight: 700;
             font-size: 12px;
         }
